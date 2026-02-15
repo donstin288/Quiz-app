@@ -5,7 +5,617 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Esame Trasporto Pubblico Lazio</title>
+    <style><!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Quiz Esame Trasporto Pubblico Lazio</title>
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(145deg, #f0f4f8 0%, #dde3e9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+        }
+        .app-wrapper {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: max(32px, min(8vw, 56px));
+            box-shadow: 0 30px 60px -15px rgba(0,20,30,0.4);
+            padding: clamp(16px, 4vw, 28px);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+        .page {
+            transition: opacity 0.25s ease;
+        }
+        .hidden {
+            display: none !important;
+        }
+        /* Cover & login cards */
+        .hero-card {
+            background: white;
+            border-radius: max(32px, min(6vw, 48px));
+            padding: clamp(24px, 6vw, 48px) clamp(20px, 5vw, 40px);
+            text-align: center;
+            box-shadow: 0 25px 40px -15px #0b2b4030;
+            border: 1px solid #ffffff;
+        }
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 3rem);
+            font-weight: 700;
+            color: #0b2b40;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .hero-sub {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            color: #2c4c6b;
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+        .badge-light {
+            background: #c44536;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+        .btn-large {
+            background: #1d4e6f;
+            border: none;
+            color: white;
+            font-size: clamp(1.4rem, 5vw, 1.8rem);
+            font-weight: 600;
+            padding: clamp(16px, 4vw, 22px) clamp(30px, 8vw, 60px);
+            border-radius: 120px;
+            cursor: pointer;
+            box-shadow: 0 15px 25px -8px #1d4e6f;
+            transition: transform 0.1s, box-shadow 0.1s;
+            border: 1px solid #ffffff50;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-large:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 30px -5px #1d4e6f;
+        }
+        .btn-secondary {
+            background: #e0e8f0;
+            color: #1d3b4f;
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
+            padding: 16px 30px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 12px rgba(0,0,0,0.05);
+            margin-top: 24px;
+            width: 100%;
+        }
+        .login-form {
+            max-width: 450px;
+            margin: 20px auto 0;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1d3b4f;
+            display: block;
+            margin-bottom: 8px;
+            margin-left: 8px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 1.1rem;
+            background: #f1f7fd;
+            border: 2px solid #cbd5e1;
+            border-radius: 60px;
+            outline: none;
+            transition: 0.15s;
+        }
+        .form-group input:focus {
+            border-color: #1d4e6f;
+            background: #ffffff;
+            box-shadow: 0 0 0 5px #1d4e6f20;
+        }
+        .error-message {
+            color: #c44536;
+            font-size: 1rem;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .flex-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+        }
+        @media (min-width: 500px) {
+            .flex-row {
+                flex-direction: row;
+            }
+            .btn-secondary {
+                width: auto;
+            }
+        }
+        /* Quiz area */
+        .quiz-page {
+            background: white;
+            border-radius: max(32px, min(6vw, 48px));
+            padding: clamp(20px, 4vw, 28px);
+            box-shadow: 0 20px 35px -8px rgba(0,20,30,0.2);
+        }
+        .progress-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eef2f6;
+            border-radius: 120px;
+            padding: 8px 16px 8px 20px;
+            margin-bottom: 24px;
+            font-weight: 500;
+            font-size: clamp(0.8rem, 3vw, 1rem);
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: #1d4e6f;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .question-card {
+            background: #f9fcff;
+            border-radius: 32px;
+            padding: clamp(24px, 5vw, 32px);
+        }
+        .q-num {
+            display: inline-block;
+            background: #c44536;
+            color: white;
+            font-weight: 700;
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            padding: 6px 20px;
+            border-radius: 60px;
+            margin-bottom: 20px;
+        }
+        .q-text {
+            font-size: clamp(1.2rem, 5vw, 1.6rem);
+            font-weight: 600;
+            line-height: 1.3;
+            color: #0b2b40;
+            margin-bottom: 28px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .option {
+            background: #f1f5f9;
+            border-radius: 60px;
+            padding: clamp(14px, 3.5vw, 16px) clamp(20px, 4vw, 28px);
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-weight: 500;
+            color: #1d3b4f;
+            transition: 0.1s;
+            word-break: break-word;
+        }
+        .option:hover {
+            background: #e2eaf2;
+            border-color: #b0c4d9;
+        }
+        .option.selected {
+            background: #cde0f0;
+            border-color: #1d4e6f;
+            font-weight: 600;
+        }
+        .option.correct-answer {
+            background: #9fcfb4;
+            border-color: #1f7a4c;
+            color: #0b3823;
+        }
+        .option.wrong-answer {
+            background: #f3cfcf;
+            border-color: #b13e3e;
+            color: #591010;
+        }
+        .feedback {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            padding: 16px 22px;
+            border-radius: 50px;
+            background: #fffacd;
+            margin-top: 20px;
+            border-left: 12px solid #d4a017;
+            word-break: break-word;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: white;
+            border: none;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-weight: 600;
+            padding: 16px 20px;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #cbd5e1;
+            color: #1d3b4f;
+            flex: 1 1 auto;
+            min-width: 120px;
+            transition: 0.1s;
+        }
+        button.primary-btn {
+            background: #1d4e6f;
+            color: white;
+            border: none;
+            box-shadow: 0 10px 15px -5px #1d4e6f80;
+        }
+        button:active { transform: translateY(2px); }
+        button:disabled { opacity: 0.4; pointer-events: none; }
+        .reset-btn { background: #f0f0f0; }
+        .stats {
+            background: #eef2f6;
+            padding: 12px 20px;
+            border-radius: 60px;
+            margin-top: 24px;
+            text-align: center;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
+        }
+        .logout-link {
+            text-align: right;
+            margin-bottom: 12px;
+        }
+        .logout-link button {
+            background: transparent;
+            border: none;
+            color: #7b3f32;
+            text-decoration: underline;
+            font-size: 1rem;
+            padding: 8px 12px;
+            box-shadow: none;
+            min-width: auto;
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            color: #3a5e7a;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 480px) {
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-buttons button {
+                width: 100%;
+            }
+            .progress-section {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-wrapper">
+    <!-- COVER PAGE -->
+    <div id="cover-page" class="page">
+        <div class="hero-card">
+            <div class="badge-light">Legge Regione Lazio n°58/1993</div>
+            <div class="hero-title">Quiz esame<br>trasporto pubblico</div>
+            <div class="hero-sub">Prova scritta · art. 6 comma 3 L. 21/1992</div>
+            <button class="btn-large" id="go-to-login-btn">👉 Accedi al quiz</button>
+            <div style="margin-top: 32px; color: #4b6b7f; font-size: 0.9rem;">
+                <span>🇮🇹 Selezione rappresentativa di domande (A, B, C, D, D bis)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN PAGE -->
+    <div id="login-page" class="page hidden">
+        <div class="hero-card">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">🔐</div>
+            <h2 style="font-size: clamp(1.8rem, 6vw, 2rem); color: #0b2b40; margin-bottom: 8px;">Accesso area quiz</h2>
+            <p style="color: #3a5e7a; margin-bottom: 30px;">Inserisci credenziali (demo: qualsiasi valore)</p>
+            
+            <div class="login-form">
+                <div class="form-group">
+                    <label>Nome utente</label>
+                    <input type="text" id="username" placeholder="es. tassista" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="······">
+                </div>
+                <div id="login-error" class="error-message"></div>
+
+                <div class="flex-row">
+                    <button class="btn-secondary" id="back-to-cover-btn">← Indietro</button>
+                    <button class="btn-large" id="login-btn" style="font-size: clamp(1.2rem, 5vw, 1.5rem); padding: 14px 30px;">Entra</button>
+                </div>
+            </div>
+            <div style="margin-top: 30px; font-size: 0.9rem; background: #eef5f9; padding: 12px; border-radius: 60px;">
+                ⚡ username e password qualsiasi (non vuoti)
+            </div>
+        </div>
+    </div>
+
+    <!-- QUIZ PAGE -->
+    <div id="quiz-page" class="page hidden">
+        <div class="quiz-page">
+            <div class="logout-link">
+                <button id="logout-btn">← Esci (torna alla copertina)</button>
+            </div>
+            <div class="progress-section">
+                <span>📋 Domande <span id="current-q-num">1</span> / <span id="total-q-count">0</span></span>
+                <span class="badge" id="score-display">✅ 0 / 0</span>
+            </div>
+
+            <div class="question-card" id="questionCard">
+                <div class="q-num" id="q-code">A 01</div>
+                <div class="q-text" id="q-text">Caricamento domande...</div>
+                <div class="options" id="options-container"></div>
+                <div class="feedback" id="feedback-area"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button id="prevBtn" disabled>◀ Precedente</button>
+                <button id="nextBtn">Successiva ▶</button>
+            </div>
+            <div style="display: flex; gap:12px; margin-top: 8px; flex-wrap: wrap;">
+                <button id="checkBtn" class="primary-btn">🔍 Verifica risposta</button>
+                <button id="resetBtn" class="reset-btn">⟲ Ricomincia</button>
+            </div>
+
+            <div class="stats" id="stats-message">
+                Seleziona un'opzione e premi "Verifica"
+            </div>
+        </div>
+        <div class="footer-note">
+            👉 Risposte ufficiali dai correttori del documento
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // DATABASE DOMANDE (stesso campione)
+        const questions = [
+            { id: "A01", section: "A", number: 1, text: "Gli pneumatici con lesioni sui fianchi che interessano le tele:", options: ["Devono essere ricostruiti", "Costituiscono pericolo solo se utilizzati ad alta pressione", "Si devono sostituire"], correct: 2 },
+            { id: "A02", section: "A", number: 2, text: "Gli pneumatici con lesioni sui fianchi che interessano le tele:", options: ["Devono essere ricostruiti", "Possono aver subito un urto contro uno spigolo vivo", "Possono essere usati a bassa velocità"], correct: 1 },
+            { id: "A03", section: "A", number: 3, text: "Viaggiando con pneumatici dello stesso asse gonfiati a pressioni diverse:", options: ["Il veicolo 'tira' dalla parte dello pneumatico a minor pressione", "Il veicolo 'tira' dalla parte dello pneumatico più gonfio", "Si affatica l'albero di trasmissione"], correct: 0 },
+            { id: "A06", section: "A", number: 6, text: "Gli pneumatici dei veicoli con battistrada eccessivamente usurato:", options: ["Non condizionano la distanza di sicurezza", "Aumentano la probabilità di incidenti stradali", "Influiscono sulla stabilità del veicolo solo in curva"], correct: 1 },
+            { id: "A13", section: "A", number: 13, text: "Quale è la definizione di navigazione da diporto?", options: ["Navigazione effettuata a scopi sportivi o ricreativi, senza perseguire finalità di lucro", "Navigazione effettuata a scopi esclusivamente sportivi", "Navigazione effettuata a scopi ricreativi senza alcuna finalità agonistica"], correct: 0 },
+            { id: "B01", section: "B", number: 1, text: "In caso di evidente emorragia da un arto si deve:", options: ["Impedire assolutamente che il soggetto beva acqua", "Bendare la ferita e far camminare il soggetto per evitare lo shock", "Premere l'arteria tra la ferita e il cuore, se si tratta di emorragia arteriosa"], correct: 2 },
+            { id: "B02", section: "B", number: 2, text: "In caso di evidente emorragia da un arto si deve:", options: ["Eseguire una fasciatura compressiva", "Impedire che il soggetto beva acqua", "Bendare la ferita e far camminare il soggetto per evitare lo shock"], correct: 0 },
+            { id: "B11", section: "B", number: 11, text: "Se si ha il sospetto che la vittima di un incidente stradale abbia riportato una frattura delle ossa del cranio si deve:", options: ["Palpare con accortezza la testa del soggetto per individuare eventuali fratture", "Immobilizzare la testa con steccature od un collare", "Se non respira, praticare la respirazione artificiale dopo aver liberato le vie respiratorie"], correct: 2 },
+            { id: "B23", section: "B", number: 23, text: "Lo stato di shock:", options: ["Può essere causato da un forte aumento di pressione arteriosa", "Può essere causato da una forte perdita di sangue", "Può essere causato da violente vertigini"], correct: 1 },
+            { id: "C01", section: "C", number: 1, text: "La 'Legenda' sulle Carte Geografiche, cosa indica?", options: ["Spiega i segni convenzionali", "Indica la storia delle località", "Specifica i ristoranti tipici"], correct: 0 },
+            { id: "C04", section: "C", number: 4, text: "Qual è il porto pubblico passeggeri civile che unisce il Lazio alla Sardegna?", options: ["Gaeta", "Civitavecchia", "Anzio"], correct: 1 },
+            { id: "C08", section: "C", number: 8, text: "Qual è la formula assicurativa RCA che premia l’assicurato che nel corso dell’anno non ha provocato danni a terzi?", options: ["Bonus – Malus", "A franchigia fissa", "A contrattazione diretta"], correct: 0 },
+            { id: "C16", section: "C", number: 16, text: "L'assicurazione per la responsabilità civile auto (RCA), obbligatoria per legge, comprende:", options: ["Il risarcimento dei danni provocati dal veicolo, solo se guidato dal proprietario", "L'incendio, il furto e il danno a terzi entro i massimali", "Il risarcimento dei danni provocati a terzi trasportati entro i massimali"], correct: 2 },
+            { id: "D01", section: "D", number: 1, text: "Come si definisce 'l’accordo di due o più parti per costituire, regolare od estinguere un rapporto giuridico-patrimoniale'?", options: ["Trattativa", "Contratto", "Clausola"], correct: 1 },
+            { id: "D08", section: "D", number: 8, text: "In un contratto, quali sono le norme che regolano la formazione degli atti negoziali in generale?", options: ["Quelle dettate dalla volontà delle parti contraenti", "Quelle dettate dal Codice Penale", "Quelle dettate dal Codice Civile"], correct: 2 },
+            { id: "D24", section: "D", number: 24, text: "In quale di questi tre tipi di società può essere esercitata l’attività di tassista?", options: ["Società cooperativa", "Società in nome collettivo", "Società a responsabilità limitata"], correct: 0 },
+            { id: "Dbis01", section: "D bis", number: 1, text: "Dov’è il teatro di Roma?", options: ["Piazza Cavour", "Largo Argentina", "Via Sistina"], correct: 1 },
+            { id: "Dbis02", section: "D bis", number: 2, text: "Il Ministero dell’Economia e delle Finanze nella città di Roma è situato in:", options: ["Via XX Settembre", "Piazza San Bernardo", "Piazza Cavour"], correct: 0 },
+            { id: "Dbis12", section: "D bis", number: 12, text: "Qual è l’Ospedale più vicino alla Basilica di San Pietro?", options: ["Forlanini", "Cristo Re", "Santo Spirito"], correct: 2 },
+            { id: "Dbis48", section: "D bis", number: 48, text: "Dov’è ubicata la sede del Senato della Repubblica?", options: ["Piazza Madama", "Piazza Montecitorio", "Piazza del Parlamento"], correct: 0 },
+            { id: "Dbis57", section: "D bis", number: 57, text: "Dov’è Ubicata la sede della Camera dei Deputati?", options: ["Piazza Madama", "Piazza Montecitorio", "Piazza Fiume"], correct: 1 }
+        ];
+
+        // ------------------- PAGES -------------------
+        const coverPage = document.getElementById('cover-page');
+        const loginPage = document.getElementById('login-page');
+        const quizPage = document.getElementById('quiz-page');
+
+        const usernameInp = document.getElementById('username');
+        const passwordInp = document.getElementById('password');
+        const loginError = document.getElementById('login-error');
+        const goToLoginBtn = document.getElementById('go-to-login-btn');
+        const backToCoverBtn = document.getElementById('back-to-cover-btn');
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        function showPage(page) {
+            coverPage.classList.add('hidden');
+            loginPage.classList.add('hidden');
+            quizPage.classList.add('hidden');
+            if (page === 'cover') coverPage.classList.remove('hidden');
+            else if (page === 'login') loginPage.classList.remove('hidden');
+            else if (page === 'quiz') quizPage.classList.remove('hidden');
+        }
+
+        goToLoginBtn.addEventListener('click', () => {
+            showPage('login');
+            usernameInp.value = '';
+            passwordInp.value = '';
+            loginError.textContent = '';
+        });
+
+        backToCoverBtn.addEventListener('click', () => {
+            showPage('cover');
+        });
+
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const user = usernameInp.value.trim();
+            const pwd = passwordInp.value.trim();
+            if (user === '' || pwd === '') {
+                loginError.textContent = '❌ Inserisci sia username che password (qualsiasi)';
+                return;
+            }
+            showPage('quiz');
+            renderQuestion();
+            updateStatsMessage();
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            showPage('cover');
+            if (confirm('Vuoi anche azzerare i progressi del quiz?')) {
+                resetQuizData();
+                renderQuestion();
+                updateStatsMessage();
+            }
+        });
+
+        // ------------------- QUIZ LOGIC -------------------
+        let currentIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let answeredStatus = new Array(questions.length).fill(false);
+        let score = 0;
+
+        const totalQuestions = questions.length;
+        document.getElementById('total-q-count').textContent = totalQuestions;
+        updateScoreDisplay();
+
+        const qCodeEl = document.getElementById('q-code');
+        const qTextEl = document.getElementById('q-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackArea = document.getElementById('feedback-area');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const checkBtn = document.getElementById('checkBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const statsMsg = document.getElementById('stats-message');
+        const currentQNumSpan = document.getElementById('current-q-num');
+
+        function renderQuestion() {
+            const q = questions[currentIndex];
+            qCodeEl.textContent = `${q.section} ${q.number.toString().padStart(2,'0')}`;
+            qTextEl.textContent = q.text;
+
+            let htmlStr = '';
+            for (let i = 0; i < q.options.length; i++) {
+                let classes = 'option';
+                if (userAnswers[currentIndex] === i) classes += ' selected';
+                if (answeredStatus[currentIndex]) {
+                    if (i === q.correct) classes += ' correct-answer';
+                    else if (userAnswers[currentIndex] === i && userAnswers[currentIndex] !== q.correct) classes += ' wrong-answer';
+                }
+                htmlStr += `<div class="${classes}" data-opt-index="${i}">${i+1}. ${q.options[i]}</div>`;
+            }
+            optionsContainer.innerHTML = htmlStr;
+
+            document.querySelectorAll('.option').forEach(optDiv => {
+                optDiv.addEventListener('click', () => {
+                    if (answeredStatus[currentIndex]) return;
+                    const idx = parseInt(optDiv.dataset.optIndex, 10);
+                    userAnswers[currentIndex] = idx;
+                    renderQuestion();
+                });
+            });
+
+            if (answeredStatus[currentIndex]) {
+                const selected = userAnswers[currentIndex];
+                if (selected === null) {
+                    feedbackArea.textContent = '⚠️ Non avevi selezionato una risposta prima di verificare.';
+                } else {
+                    const isCorrect = (selected === q.correct);
+                    feedbackArea.innerHTML = isCorrect
+                        ? '✅ Risposta corretta!'
+                        : `❌ Risposta sbagliata. Quella corretta era: ${q.correct+1}. ${q.options[q.correct]}`;
+                }
+            } else {
+                feedbackArea.innerHTML = '';
+            }
+
+            currentQNumSpan.textContent = currentIndex + 1;
+            prevBtn.disabled = (currentIndex === 0);
+            nextBtn.disabled = (currentIndex === totalQuestions - 1);
+            updateStatsMessage();
+        }
+
+        function updateStatsMessage() {
+            const answeredCount = answeredStatus.filter(v => v).length;
+            statsMsg.innerHTML = `📊 Verificate: ${answeredCount}/${totalQuestions} · Punteggio: ${score}`;
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('score-display').textContent = `✅ ${score} / ${totalQuestions}`;
+        }
+
+        function checkCurrent() {
+            if (answeredStatus[currentIndex]) {
+                alert('Hai già verificato questa domanda. Passa alla successiva.');
+                return;
+            }
+            const selected = userAnswers[currentIndex];
+            if (selected === null) {
+                alert('Seleziona una risposta prima di verificare.');
+                return;
+            }
+            const q = questions[currentIndex];
+            if (selected === q.correct) score++;
+            answeredStatus[currentIndex] = true;
+            updateScoreDisplay();
+            renderQuestion();
+            updateStatsMessage();
+        }
+
+        function goPrev() { if (currentIndex > 0) { currentIndex--; renderQuestion(); } }
+        function goNext() { if (currentIndex < totalQuestions - 1) { currentIndex++; renderQuestion(); } }
+
+        function resetQuizData() {
+            userAnswers = new Array(questions.length).fill(null);
+            answeredStatus = new Array(questions.length).fill(false);
+            score = 0;
+            currentIndex = 0;
+            updateScoreDisplay();
+            renderQuestion();
+            updateStatsMessage();
+        }
+
+        prevBtn.addEventListener('click', goPrev);
+        nextBtn.addEventListener('click', goNext);
+        checkBtn.addEventListener('click', checkCurrent);
+        resetBtn.addEventListener('click', () => { if (confirm('Ricominciare il quiz?')) resetQuizData(); });
+
+        renderQuestion();
+        updateStatsMessage();
+        showPage('cover');
+    })();
+</script>
+</body>
+</html>
         * {
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
