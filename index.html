@@ -1,5 +1,4 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 12px;
+            padding: 8px;
         }
         .app-wrapper {
             max-width: 1000px;
@@ -26,47 +25,48 @@
             background: rgba(255,255,255,0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-radius: max(32px, min(8vw, 56px));
-            box-shadow: 0 30px 60px -15px rgba(0,20,30,0.4);
-            padding: clamp(16px, 4vw, 28px);
+            border-radius: max(24px, min(6vw, 48px));
+            box-shadow: 0 20px 40px -12px rgba(0,20,30,0.4);
+            padding: clamp(12px, 4vw, 24px);
             border: 1px solid rgba(255,255,255,0.8);
         }
         .page {
-            transition: opacity 0.25s ease;
+            transition: opacity 0.2s ease;
         }
         .hidden {
             display: none !important;
         }
+
         /* Cover & login cards */
         .hero-card {
             background: white;
-            border-radius: max(32px, min(6vw, 48px));
-            padding: clamp(24px, 6vw, 48px) clamp(20px, 5vw, 40px);
+            border-radius: max(28px, min(6vw, 48px));
+            padding: clamp(24px, 7vw, 48px) clamp(16px, 5vw, 40px);
             text-align: center;
-            box-shadow: 0 25px 40px -15px #0b2b4030;
+            box-shadow: 0 20px 35px -12px #0b2b4030;
             border: 1px solid #ffffff;
         }
         .hero-title {
-            font-size: clamp(2rem, 8vw, 3rem);
+            font-size: clamp(2.2rem, 10vw, 3.5rem);
             font-weight: 700;
             color: #0b2b40;
             letter-spacing: -0.02em;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             line-height: 1.2;
         }
         .hero-sub {
-            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            font-size: clamp(1.2rem, 5vw, 1.6rem);
             color: #2c4c6b;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             font-weight: 300;
         }
         .badge-light {
             background: #c44536;
             color: white;
-            padding: 8px 20px;
+            padding: 10px 22px;
             border-radius: 60px;
             font-weight: 600;
-            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+            font-size: clamp(0.9rem, 4vw, 1.2rem);
             display: inline-block;
             margin-bottom: 24px;
         }
@@ -74,47 +74,48 @@
             background: #1d4e6f;
             border: none;
             color: white;
-            font-size: clamp(1.4rem, 5vw, 1.8rem);
+            font-size: clamp(1.5rem, 6vw, 2rem);
             font-weight: 600;
-            padding: clamp(16px, 4vw, 22px) clamp(30px, 8vw, 60px);
+            padding: clamp(18px, 5vw, 24px) clamp(24px, 8vw, 60px);
             border-radius: 120px;
             cursor: pointer;
-            box-shadow: 0 15px 25px -8px #1d4e6f;
+            box-shadow: 0 12px 22px -6px #1d4e6f;
             transition: transform 0.1s, box-shadow 0.1s;
             border: 1px solid #ffffff50;
-            margin-top: 20px;
+            margin: 16px auto 0;
             width: 100%;
             max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            display: block;
         }
-        .btn-large:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 30px -5px #1d4e6f;
+        .btn-large:active {
+            transform: scale(0.98);
+            box-shadow: 0 8px 16px -4px #1d4e6f;
         }
         .btn-secondary {
             background: #e0e8f0;
             color: #1d3b4f;
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
-            padding: 16px 30px;
+            font-size: clamp(1.2rem, 5vw, 1.4rem);
+            padding: 18px 28px;
             border-radius: 60px;
             border: none;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 8px 12px rgba(0,0,0,0.05);
-            margin-top: 24px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
             width: 100%;
+            max-width: 280px;
+            margin: 8px auto;
         }
+
         .login-form {
-            max-width: 450px;
-            margin: 20px auto 0;
+            max-width: 420px;
+            margin: 16px auto 0;
             text-align: left;
         }
         .form-group {
             margin-bottom: 24px;
         }
         .form-group label {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: #1d3b4f;
             display: block;
@@ -123,8 +124,8 @@
         }
         .form-group input {
             width: 100%;
-            padding: 18px 24px;
-            font-size: 1.1rem;
+            padding: 20px 24px;
+            font-size: 1.2rem;
             background: #f1f7fd;
             border: 2px solid #cbd5e1;
             border-radius: 60px;
@@ -138,8 +139,8 @@
         }
         .error-message {
             color: #c44536;
-            font-size: 1rem;
-            margin-top: 10px;
+            font-size: 1.1rem;
+            margin-top: 8px;
             text-align: center;
             font-weight: 500;
         }
@@ -157,14 +158,16 @@
             }
             .btn-secondary {
                 width: auto;
+                margin: 0;
             }
         }
-        /* Quiz area */
+
+        /* Quiz area – extra phone love */
         .quiz-page {
             background: white;
-            border-radius: max(32px, min(6vw, 48px));
-            padding: clamp(20px, 4vw, 28px);
-            box-shadow: 0 20px 35px -8px rgba(0,20,30,0.2);
+            border-radius: max(28px, min(6vw, 48px));
+            padding: clamp(18px, 5vw, 28px);
+            box-shadow: 0 18px 30px -8px rgba(0,20,30,0.2);
         }
         .progress-section {
             display: flex;
@@ -172,64 +175,62 @@
             align-items: center;
             background: #eef2f6;
             border-radius: 120px;
-            padding: 8px 16px 8px 20px;
-            margin-bottom: 24px;
-            font-weight: 500;
-            font-size: clamp(0.8rem, 3vw, 1rem);
+            padding: 10px 16px;
+            margin-bottom: 22px;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
             gap: 8px;
             flex-wrap: wrap;
         }
         .badge {
             background: #1d4e6f;
             color: white;
-            padding: 6px 16px;
+            padding: 8px 18px;
             border-radius: 40px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             white-space: nowrap;
         }
         .question-card {
             background: #f9fcff;
             border-radius: 32px;
-            padding: clamp(24px, 5vw, 32px);
+            padding: clamp(20px, 5vw, 32px);
         }
         .q-num {
             display: inline-block;
             background: #c44536;
             color: white;
             font-weight: 700;
-            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-            padding: 6px 20px;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            padding: 8px 24px;
             border-radius: 60px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .q-text {
-            font-size: clamp(1.2rem, 5vw, 1.6rem);
+            font-size: clamp(1.4rem, 6vw, 1.8rem);
             font-weight: 600;
             line-height: 1.3;
             color: #0b2b40;
             margin-bottom: 28px;
+            word-break: break-word;
         }
         .options {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 30px;
+            gap: 14px;
+            margin-bottom: 32px;
         }
         .option {
             background: #f1f5f9;
             border-radius: 60px;
-            padding: clamp(14px, 3.5vw, 16px) clamp(20px, 4vw, 28px);
+            padding: clamp(16px, 4vw, 20px) clamp(20px, 5vw, 28px);
             border: 2px solid transparent;
             cursor: pointer;
-            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-size: clamp(1.1rem, 5vw, 1.3rem);
             font-weight: 500;
             color: #1d3b4f;
             transition: 0.1s;
             word-break: break-word;
-        }
-        .option:hover {
-            background: #e2eaf2;
-            border-color: #b0c4d9;
+            line-height: 1.4;
         }
         .option.selected {
             background: #cde0f0;
@@ -247,8 +248,8 @@
             color: #591010;
         }
         .feedback {
-            font-size: clamp(1rem, 4vw, 1.2rem);
-            padding: 16px 22px;
+            font-size: clamp(1.1rem, 5vw, 1.3rem);
+            padding: 18px 22px;
             border-radius: 50px;
             background: #fffacd;
             margin-top: 20px;
@@ -259,63 +260,67 @@
             display: flex;
             justify-content: space-between;
             margin-top: 24px;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         button {
             background: white;
             border: none;
-            font-size: clamp(1rem, 4vw, 1.2rem);
+            font-size: clamp(1.1rem, 5vw, 1.3rem);
             font-weight: 600;
-            padding: 16px 20px;
+            padding: 18px 14px;
             border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
             border: 1px solid #cbd5e1;
             color: #1d3b4f;
             flex: 1 1 auto;
-            min-width: 120px;
+            min-width: 130px;
             transition: 0.1s;
         }
         button.primary-btn {
             background: #1d4e6f;
             color: white;
             border: none;
-            box-shadow: 0 10px 15px -5px #1d4e6f80;
+            box-shadow: 0 8px 16px -4px #1d4e6fa0;
         }
-        button:active { transform: translateY(2px); }
-        button:disabled { opacity: 0.4; pointer-events: none; }
-        .reset-btn { background: #f0f0f0; }
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        button:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .reset-btn {
+            background: #f0f0f0;
+        }
         .stats {
             background: #eef2f6;
-            padding: 12px 20px;
+            padding: 14px 18px;
             border-radius: 60px;
             margin-top: 24px;
             text-align: center;
-            font-weight: 500;
-            font-size: clamp(0.9rem, 3.5vw, 1rem);
+            font-weight: 600;
+            font-size: clamp(1rem, 4.5vw, 1.1rem);
         }
         .logout-link {
             text-align: right;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
         .logout-link button {
             background: transparent;
             border: none;
             color: #7b3f32;
             text-decoration: underline;
-            font-size: 1rem;
+            font-size: 1.1rem;
             padding: 8px 12px;
             box-shadow: none;
             min-width: auto;
         }
-        .footer-note {
-            text-align: center;
-            margin-top: 20px;
-            color: #3a5e7a;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 480px) {
+
+        /* stacked buttons on very narrow */
+        @media (max-width: 450px) {
             .nav-buttons {
                 flex-direction: column;
             }
@@ -325,6 +330,15 @@
             .progress-section {
                 justify-content: center;
             }
+            .btn-large {
+                max-width: 100%;
+            }
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            color: #3a5e7a;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -337,8 +351,8 @@
             <div class="hero-title">Quiz esame<br>trasporto pubblico</div>
             <div class="hero-sub">Prova scritta · art. 6 comma 3 L. 21/1992</div>
             <button class="btn-large" id="go-to-login-btn">👉 Accedi al quiz</button>
-            <div style="margin-top: 32px; color: #4b6b7f; font-size: 0.9rem;">
-                <span>🇮🇹 Selezione rappresentativa di domande (A, B, C, D, D bis)</span>
+            <div style="margin-top: 30px; color: #4b6b7f; font-size: 0.9rem;">
+                <span>🇮🇹 20 domande campione · A, B, C, D, D bis</span>
             </div>
         </div>
     </div>
@@ -346,9 +360,9 @@
     <!-- LOGIN PAGE -->
     <div id="login-page" class="page hidden">
         <div class="hero-card">
-            <div style="font-size: 2.5rem; margin-bottom: 10px;">🔐</div>
-            <h2 style="font-size: clamp(1.8rem, 6vw, 2rem); color: #0b2b40; margin-bottom: 8px;">Accesso area quiz</h2>
-            <p style="color: #3a5e7a; margin-bottom: 30px;">Inserisci credenziali (demo: qualsiasi valore)</p>
+            <div style="font-size: 2.8rem; margin-bottom: 8px;">🔐</div>
+            <h2 style="font-size: clamp(2rem, 8vw, 2.4rem); color: #0b2b40; margin-bottom: 6px;">Accesso area quiz</h2>
+            <p style="color: #3a5e7a; margin-bottom: 24px;">Inserisci credenziali (demo: qualsiasi valore)</p>
             
             <div class="login-form">
                 <div class="form-group">
@@ -363,10 +377,10 @@
 
                 <div class="flex-row">
                     <button class="btn-secondary" id="back-to-cover-btn">← Indietro</button>
-                    <button class="btn-large" id="login-btn" style="font-size: clamp(1.2rem, 5vw, 1.5rem); padding: 14px 30px;">Entra</button>
+                    <button class="btn-large" id="login-btn" style="font-size: 1.5rem; padding: 16px 32px;">Entra</button>
                 </div>
             </div>
-            <div style="margin-top: 30px; font-size: 0.9rem; background: #eef5f9; padding: 12px; border-radius: 60px;">
+            <div style="margin-top: 28px; font-size: 1rem; background: #eef5f9; padding: 12px; border-radius: 60px;">
                 ⚡ username e password qualsiasi (non vuoti)
             </div>
         </div>
@@ -411,7 +425,7 @@
 
 <script>
     (function() {
-        // DATABASE DOMANDE (stesso campione)
+        // DATABASE DOMANDE (stesso campione, puoi espandere)
         const questions = [
             { id: "A01", section: "A", number: 1, text: "Gli pneumatici con lesioni sui fianchi che interessano le tele:", options: ["Devono essere ricostruiti", "Costituiscono pericolo solo se utilizzati ad alta pressione", "Si devono sostituire"], correct: 2 },
             { id: "A02", section: "A", number: 2, text: "Gli pneumatici con lesioni sui fianchi che interessano le tele:", options: ["Devono essere ricostruiti", "Possono aver subito un urto contro uno spigolo vivo", "Possono essere usati a bassa velocità"], correct: 1 },
